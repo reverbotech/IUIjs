@@ -22,8 +22,8 @@
 					(this.modelLastUpdatedBy[obj._uid]) || (this.modelLastUpdatedBy[obj._uid]={});
 					
 					(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute]) || (this.modelLastUpdatedBy[obj._uid][obj.optionAttribute]=[])
-					if(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].indexOf(this.uid)===-1){
-						this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].push(this.uid);
+					if(this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].indexOf(this._uid)===-1){
+						this.modelLastUpdatedBy[obj._uid][obj.optionAttribute].push(this._uid);
 						var result=IUI.Template.render(obj.template,this.model);	
 						obj.model.model[obj.optionAttribute]=result;
 					}

@@ -7,6 +7,18 @@
   }
 })(function(IUI){
 
+
+	var arraysEqual =function arraysEqual(a, b) {
+	  if (a === b) return true;
+	  if (a == null || b == null) return false;
+	  if (a.length != b.length) return false;
+
+	  for (var i = 0; i < a.length; ++i) {
+		if (a[i] !== b[i]) return false;
+	  }
+	  return true;
+	}
+	
 	var OptionsModel=IUI.ObservableModel.extend({
 		ModelType: 'OptionsModel',
 		_handleChange: function(key,value,sender){
@@ -26,8 +38,18 @@
 							(_modelLastUpdated[obj.mappedAttributes[a]]) || (_modelLastUpdated[obj.mappedAttributes[a]]=[]);
 							if(_modelLastUpdated[obj.mappedAttributes[a]].indexOf(this._uid)===-1){
 								_modelLastUpdated[obj.mappedAttributes[a]].push(this._uid);
-								if(obj.model.model[obj.mappedAttributes[a]]!==value)
+								
+								
+								// Checking equality of mapped attribute
+								if(Array.isArray(obj.model.model[obj.mappedAttributes[a]]) &&  Array.isArray(value)){
+									
+									if(!arraysEqual(obj.model.model[obj.mappedAttributes[a]] , value)){
+										obj.model.model[obj.mappedAttributes[a]]=value;
+									}
+									
+								}else if(obj.model.model[obj.mappedAttributes[a]]!==value){
 									obj.model.model[obj.mappedAttributes[a]]=value;
+								}
 							}
 						}
 					}

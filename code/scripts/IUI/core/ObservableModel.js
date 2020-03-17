@@ -31,7 +31,7 @@
 			
 			var that=this, _modelUpdating=false;
 			this.model=model || {};
-			
+			that._keyTimeoutId={};
 			Object.defineProperty(this.model,'__update',{
 				value: function(_newModel){
 					_modelUpdating=true;
@@ -49,6 +49,7 @@
 				enumerable: false
     		});
 				
+			that._keyTimeoutId={};
 			
 			Object.keys(model).forEach(function(key){
 				if(list && (list.indexOf(key)===-1)){
@@ -67,7 +68,8 @@
 							var valid=validator(value);
 							if(_data[key]!==value && valid.valid){
 								_data[key]=value;
-								setTimeout(function(){
+								clearTimeout(that._keyTimeoutId[key]);
+								that._keyTimeoutId[key] = setTimeout(function(){
 									(_modelUpdating) || (_handleChange(key,value));
 								});
 							}

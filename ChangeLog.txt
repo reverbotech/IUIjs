@@ -129,6 +129,8 @@
 # ADDED - Placeholder can be added to IUI InputBox
 # CHANGED - TwoWay binding behavior of ContainerModel and OptionsModel
 # CHANGED - A bit of layout.html
+# FIXED - ForeverLoop in updating Arrays
+# FIXED - MultiModel same key issue
 
 ---------Version 1.0.1
 * Added attach/detach API to Widgets.
